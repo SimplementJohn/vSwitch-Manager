@@ -1,5 +1,6 @@
 # vSwitch-Manager
 <br>FR - vSwitch Manager est un Script PowerShell qui permet d'aider à mettre en place des vSwitch Windows Server.
-<br>EN - vSwitch Manager is a PowerShell script that helps to set up Windows Server vSwitches.
+<br>
+<br> Il vous suffit juste de téléhcrager le fichier .ps1 et de l'exécuté sur la machine cible
 
 <img title="interface" alt="Alt text" src="interface.png">
