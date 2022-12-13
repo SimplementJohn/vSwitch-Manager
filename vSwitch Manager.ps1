@@ -29,14 +29,14 @@ Write-Output ""
 $choixUtilisateur = read-host "Que souhaitez vous faire ? (1,2,3,4,5)"
 Write-Output ""
 
-#Programme Créer un vSwitch #FINIS A TESTER
+#Programme Créer un vSwitch 
 if ( $choixUtilisateur -eq 1 )
 {
     #nous entrons le nombre de carte r?ea dont nous avons besoin
     $nombreCarteReseau = read-host "Entrez le nombre de carte reeau pour le vSwitch (1,2,3 ou 4)"
 
 
-    #Si on selectione 1 carte r?eau
+    #Si on selectione 1 carte reseau
     if ( $nombreCarteReseau -eq 1 )
     {
         Get-NetAdapter
@@ -52,7 +52,7 @@ if ( $choixUtilisateur -eq 1 )
 
     }
 
-    #Si on selectione 2 cartes r?eau
+    #Si on selectione 2 cartes reeau
     if ( $nombreCarteReseau -eq 2 )
     {
         Get-NetAdapter
@@ -71,7 +71,7 @@ if ( $choixUtilisateur -eq 1 )
     }
 
 
-    #Si on selectione 3 cartes r?eau
+    #Si on selectione 3 cartes reeau
     if ( $nombreCarteReseau -eq 3 )
     {
         Get-NetAdapter
@@ -91,7 +91,7 @@ if ( $choixUtilisateur -eq 1 )
     }
 
 
-    #Si on selectione 4 cartes r?eau
+    #Si on selectione 4 cartes reeau
     if ( $nombreCarteReseau -eq 4 )
     {
         Get-NetAdapter
@@ -114,7 +114,7 @@ if ( $choixUtilisateur -eq 1 )
 }
 
 
-#Programe supprimer un vSwitch    #FINIS A TESTER
+#Programe supprimer un vSwitch
 if ( $choixUtilisateur -eq 2 )
 {
     Get-NetAdapter
@@ -128,7 +128,7 @@ if ( $choixUtilisateur -eq 2 )
 }
 
 
-#Programme Créer un adaptateur réseau pour des VM  #FINIS A TESTER 
+#Programme Créer un adaptateur réseau pour des VM 
 if ( $choixUtilisateur -eq 3 )
 {
     Write-Output ""
@@ -182,13 +182,13 @@ if ( $choixUtilisateur -eq 3 )
 }
 
 
-#Programme Supprimer un adaptateur réseau pour des VM #A FAIRE
+#Programme Supprimer un adaptateur réseau pour des VM 
 if ( $choixUtilisateur -eq 4 )
 {
 
 }
 
-#Programme Créer un adaptateur réseau pour l'HPV #A TESTER CEST FINIS
+#Programme Créer un adaptateur réseau pour l'HPV
 if ( $choixUtilisateur -eq 5 )
 {
     $nomvSwitch= read-host "Entrez le nom de votre vSwitch"
