@@ -26,14 +26,14 @@ Write-Output "5 - Créer un adaptateur réseau pour l'HPV (OPERATIONEL)"
 Write-Output "_______________________________________________________________________"
 Write-Output ""
 
-$choixUtilisateur = read-host "Que souhaitez vous faire ? (1,2,3,4,5)"
+$choixUtilisateur = read-host "Que souhaitez vous faire ? 1,2,3,4,5"
 Write-Output ""
 
 #Programme Créer un vSwitch 
 if ( $choixUtilisateur -eq 1 )
 {
     #nous entrons le nombre de carte r?ea dont nous avons besoin
-    $nombreCarteReseau = read-host "Entrez le nombre de carte reeau pour le vSwitch (1,2,3 ou 4)"
+    $nombreCarteReseau = read-host "Entrez le nombre de carte reeau pour le vSwitch. 1,2,3 ou 4"
 
 
     #Si on selectione 1 carte reseau
@@ -48,8 +48,7 @@ if ( $choixUtilisateur -eq 1 )
         $nomVSwitch = read-host "Entrez le nom que vous voulez donner au vSwitch:"
         Write-Output ""
         #Creation du vswitch
-        Add-VMNetworkAdapter -ManagementOS -Name "$carteReseau1" -SwitchName "$nomVSwitch"
-
+        New-VMSwitch -Name $nomVSwitch -NetAdapterName "$carteReseau1" -EnableEmbeddedTeaming $true -AllowNetLbfoTeams $true
     }
 
     #Si on selectione 2 cartes reeau
@@ -66,7 +65,7 @@ if ( $choixUtilisateur -eq 1 )
         $nomVSwitch = read-host "Entrez le nom que vous voulez donner au vSwitch"
 
         #Creation du vswitch
-        Add-VMNetworkAdapter -ManagementOS -Name "$carteReseau1", "$carteReseau2" -SwitchName "$nomVSwitch"
+        New-VMSwitch -Name $nomVSwitch -NetAdapterName "$carteReseau1","$carteReseau2" -EnableEmbeddedTeaming $true -AllowNetLbfoTeams $true
 
     }
 
@@ -87,7 +86,7 @@ if ( $choixUtilisateur -eq 1 )
         $nomVSwitch = read-host "Entrez le nom que vous voulez donner au vSwitch"
 
         #Creation du vswitch
-        Add-VMNetworkAdapter -ManagementOS -Name "$carteReseau1", "$carteReseau2", "$carteReseau3" -SwitchName "$nomVSwitch"
+        New-VMSwitch -Name $nomVSwitch -NetAdapterName "$carteReseau1", "$carteReseau2", "$carteReseau3" -EnableEmbeddedTeaming $true -AllowNetLbfoTeams $true
     }
 
 
@@ -108,7 +107,7 @@ if ( $choixUtilisateur -eq 1 )
         $nomVSwitch = read-host "Entrez le nom que vous voulez donner au vSwitch"
 
         #Creation du vswitch
-        Add-VMNetworkAdapter -ManagementOS -Name "$carteReseau1", "$carteReseau2", "$carteReseau3", "$carteReseau4" -SwitchName "$nomVSwitch"
+         New-VMSwitch -Name $nomVSwitch -NetAdapterName "$carteReseau1", "$carteReseau2", "$carteReseau3","$carteReseau4" -EnableEmbeddedTeaming $true -AllowNetLbfoTeams $true
     }
 
 }
