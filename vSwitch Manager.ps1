@@ -1,3 +1,7 @@
+
+#boucle infini
+while(1){
+
 clear
 Write-Output ""
 Write-Output "Programme Administration vSwitch"
@@ -15,8 +19,8 @@ Write-Output "
     _ _|   __|_ _ _|_| |_ ___| |_   |     |___ ___ ___ ___ ___ ___ 
    | | |__   | | | | |  _|  _|   |  | | | | .'|   | .'| . | -_|  _|
     \_/|_____|_____|_|_| |___|_|_|  |_|_|_|__,|_|_|__,|_  |___|_|  
-                                                      |___|           
-"
+                                                      |___|      
+                                                                   v1.1"
 Write-Output "_______________________________________________________________________"
 Write-Output "1 - Créer un vSwitch (OPERATIONEL)"
 Write-Output "2 - Supprimer un vSwitch (OPERATIONEL)"
@@ -33,7 +37,7 @@ Write-Output ""
 if ( $choixUtilisateur -eq 1 )
 {
     #nous entrons le nombre de carte r?ea dont nous avons besoin
-    $nombreCarteReseau = read-host "Entrez le nombre de carte reeau pour le vSwitch. 1,2,3 ou 4"
+    $nombreCarteReseau = read-host "Entrez le nombre de carte reeau pour le vSwitch. ',2,3 ou 4"
 
 
     #Si on selectione 1 carte reseau
@@ -42,7 +46,7 @@ if ( $choixUtilisateur -eq 1 )
         Get-NetAdapter
         Write-Output ""
         Write-Output "Vous allez creer le vSwitch avec une carte réseau"
-        $carteReseau1 = read-host "Entrez le nom 'Name' de la PREMIERE carte reseau:"
+        $carteReseau1 = read-host "Entrez le nom 'Name' de la PREMIERE carte reseau:"S
         Write-Output ""
         Write-Output "Vous avez selectione '$carteReseau1'"
         $nomVSwitch = read-host "Entrez le nom que vous voulez donner au vSwitch:"
@@ -197,4 +201,6 @@ if ( $choixUtilisateur -eq 5 )
     Get-NetAdapter
     Write-Output ""
     read-host "Fin du programme appuyez sur ENTREE pour fermer la feunetre)"
+}
+
 }
