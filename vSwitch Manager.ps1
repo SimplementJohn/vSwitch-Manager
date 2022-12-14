@@ -3,12 +3,24 @@
 while(1){
 
 clear
+Write-Output "_______________________________________________________________________"
+Write-Output "
+                                                                
+        _____       _ _       _      _____                         
+    _ _|   __|_ _ _|_| |_ ___| |_   |     |___ ___ ___ ___ ___ ___ 
+   | | |__   | | | | |  _|  _|   |  | | | | .'|   | .'| . | -_|  _|
+    \_/|_____|_____|_|_| |___|_|_|  |_|_|_|__,|_|_|__,|_  |___|_|  
+                                                      |___|      
+                                                                   v1.1"
+Write-Output "_______________________________________________________________________"
 Write-Output ""
 Write-Output "Programme Administration vSwitch"
-Write-Output "Creer par ROSA John, Version 1.0"
-Write-Output "       Fait le 13/12/2022"
+Write-Output "     Creer par ROSA John"
+Write-Output "     Fait le 13/12/2022"
 Write-Output ""
+Write-Output "_______________________________________________________________________"
 
+Write-Output ""
 read-host "Appuyez sur la touche ENTREE pour continuer"
 clear
 
@@ -20,17 +32,20 @@ Write-Output "
    | | |__   | | | | |  _|  _|   |  | | | | .'|   | .'| . | -_|  _|
     \_/|_____|_____|_|_| |___|_|_|  |_|_|_|__,|_|_|__,|_  |___|_|  
                                                       |___|      
-                                                                   v1.1"
+                                                                                     "
 Write-Output "_______________________________________________________________________"
-Write-Output "1 - Créer un vSwitch (OPERATIONEL)"
-Write-Output "2 - Supprimer un vSwitch (OPERATIONEL)"
-Write-Output "3 - Créer un ou plusieurs adaptateurs réseaux pour des VM (OPERATIONEL)"
-Write-Output "4 - Supprimer un ou plusieur adaptateurs réseaux pour des VM (HS)"
-Write-Output "5 - Créer un adaptateur réseau pour l'HPV (OPERATIONEL)"
+Write-Output ""
+Write-Output "1 - Créer un vSwitch"
+Write-Output "2 - Supprimer un vSwitch"
+Write-Output "3 - Créer un ou plusieurs adaptateurs réseaux pour des VMs"
+Write-Output "4 - Supprimer un ou plusieur adaptateurs réseaux pour des VMs (HS)"
+Write-Output "5 - Créer un adaptateur réseau pour l'HPV"
+Write-Output "6 - Afficher les cartes réseaux"
+Write-Output ""
 Write-Output "_______________________________________________________________________"
 Write-Output ""
 
-$choixUtilisateur = read-host "Que souhaitez vous faire ? 1,2,3,4,5"
+$choixUtilisateur = read-host "Que souhaitez vous faire ? 1,2,3,4,5 ou 6"
 Write-Output ""
 
 #Programme Créer un vSwitch 
@@ -203,4 +218,17 @@ if ( $choixUtilisateur -eq 5 )
     read-host "Fin du programme appuyez sur ENTREE pour fermer la feunetre)"
 }
 
+
+#Programme Afficher les cartes réseaux
+if ( $choixUtilisateur -eq 6 )
+{
+    Write-Output "_______________________________________________________________________"
+    Get-NetAdapter 
+    Write-Output "_______________________________________________________________________"
+    Write-Output ""
+    $choix = read-host "Appyez sur ENTREE pour quitter"
+
 }
+
+
+}#fin boucle while(1)
