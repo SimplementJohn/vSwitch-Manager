@@ -27,11 +27,12 @@ Write-Output "3 - Ajoutez un Adaptateur Réseau a l'HPV"
 Write-Output "4 - Ajoutez un adaptateur Réseau a une VM"
 Write-Output "5 - Supprimer un adaptateur Réseau a une VM"
 Write-Output "6 - Affiche les Cartes Réseaux, vSwitch et les VM "
+Write-Output "7 - Copyright "
 Write-Output ""
 Write-Output "_______________________________________________________________________"
 Write-Output ""
 
-$choixUtilisateur = read-host "Que souhaitez vous faire ? 1,2,3,4,5 ou 6"
+$choixUtilisateur = read-host "Que souhaitez vous faire ? 1,2,3,4,5,6 ou 7"
 Write-Output ""
 
 #Créer un vSwitch
@@ -152,6 +153,19 @@ if ( $choixUtilisateur -eq 6 )
     $choix = read-host "Appyez sur ENTREE pour quitter"
 }
 
+#Programme copyright
+if ( $choixUtilisateur -eq 7 )
+{
+    Write-Output "_______________________________________________________________________"
+    Write-Output ""
+    Write-Output "Programme vSwitch Manager, ce progrrame permet d'administrer des vSwitch en PowerSheel"
+    Write-Output "Cree par ROSA John le 04/10/2023"
+    Write-Output "Version 2.0"
+    Write-Output ""
+    Write-Output "_______________________________________________________________________"
+    Write-Output ""
+    $choix = read-host "Appyez sur ENTREE pour quitter"
+}
 
 
 
