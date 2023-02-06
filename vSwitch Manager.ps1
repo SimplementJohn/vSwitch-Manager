@@ -15,51 +15,70 @@ Write-Output "
            _          ____  _     _ _   _       _ _                 
           | |_ _ _   |    \|_|___|_| |_| |_ ___| | |                      
           | . | | |  |  |  | | . | |  _|   | .'| | |                      
-          |___|_  |  |____/|_|_  |_|_| |_|_|__,|_|_|      Lite v2.0                
+          |___|_  |  |____/|_|_  |_|_| |_|_|__,|_|_|      Lite v2.1                
               |___|          |___|                              
                                                                  "
 
 Write-Output "_______________________________________________________________________"
 Write-Output ""
-Write-Output "1 - Créer un vSwitch"
+Write-Output "1 - Creer un vSwitch"
 Write-Output "2 - Supprimer un vSwitch"
-Write-Output "3 - Ajoutez un Adaptateur Réseau a l'HPV"
-Write-Output "4 - Ajoutez un adaptateur Réseau a une VM"
-Write-Output "5 - Supprimer un adaptateur Réseau a une VM"
-Write-Output "6 - Affiche les Cartes Réseaux, vSwitch et les VM "
-Write-Output "7 - Copyright "
+Write-Output "3 - Ajoutez un Adaptateur Reseau a l'HPV"
+Write-Output "4 - Ajoutez un adaptateur Reseau a une VM"
+Write-Output "5 - Supprimer un adaptateur Reseau a une VM"
+Write-Output "6 - Affiche les Cartes Reseaux, vSwitch et les VM "
+Write-Output "7 - Installer le role Hyper-V"
+Write-Output "8 - Copyright "
 Write-Output ""
 Write-Output "_______________________________________________________________________"
 Write-Output ""
 
-$choixUtilisateur = read-host "Que souhaitez vous faire ? 1,2,3,4,5,6 ou 7"
+$choixUtilisateur = read-host "Que souhaitez vous faire ? 1,2,3,4,5,6,7 ou 8"
 Write-Output ""
 
-#Créer un vSwitch
+#Creer un vSwitch
 if ( $choixUtilisateur -eq 1 )
 {
-    #nous entrons le nombre de carte reseau dont nous avons besoin
-    $nombreCarteReseau = read-host "Entrez le nombre de carte reseau pour le vSwitch."
 
-
-    #Si on selectione 1 carte reseau
-    if ( $nombreCarteReseau -eq 1 )
+    $versionOS = read-host "Vous etes sur WindowsServer2019 ou WindowsServer2022 (1 ou 2)? "
+    if ( $versionOS -eq 1)  #Si l'utilisateur a selectionne windows server 2019
     {
+        Write-Output ""
+        Write-Output "Vous avez selectione WindowsServer2019"
+        Write-Output ""
         Get-NetAdapter
         Write-Output ""
-        Write-Output "Vous allez creer le vSwitch avec une carte réseau"
-        $carteReseau1 = read-host "Entrez le nom 'Name' de votre carte reseau:"
+        $carteReseau1 = read-host "Entrez le nom 'Name' de votre TEAMING:"
         Write-Output "Vous avez selectione '$carteReseau1'"
         Write-Output ""
         $nomVSwitch = read-host "Entrez le nom que vous voulez donner au vSwitch:"
         Write-Output ""
         #Creation du vswitch
-        New-VMSwitch "$nomVSwitch" -NetAdapterName "$carteReseau1" -AllowManagementOS $false -AllowNetLbfoTeams $true
-        Write-Output ""
-        Write-Output "Le vSwitch portant le nom de $nomVSwitch à été crée"
+        New-VMSwitch "$nomVSwitch" -NetAdapterName "$carteReseau1" -AllowManagementOS $false
         Write-Output ""
         $choix = read-host "Appyez sur ENTREE pour quitter"
     }
+
+    if ( $versionOS -eq 2)  #Si l'utilisateur a selectionne windows server 2022
+    {
+        Write-Output ""
+        Write-Output "Vous avez selectione WindowsServer2012"
+        Write-Output ""
+        Get-NetAdapter
+        Write-Output ""
+        $carteReseau1 = read-host "Entrez le nom 'Name' de votre TEAMING:"
+        Write-Output "Vous avez selectione '$carteReseau1'"
+        Write-Output ""
+        $nomVSwitch = read-host "Entrez le nom que vous voulez donner au vSwitch:"
+         Write-Output ""
+        #Creation du vswitch
+        New-VMSwitch "$nomVSwitch" -NetAdapterName "$carteReseau1" -AllowManagementOS $false -AllowNetLbfoTeams $true
+        Write-Output ""
+        $choix = read-host "Appyez sur ENTREE pour quitter"
+    }
+
+
+
 }
 
 
@@ -77,7 +96,7 @@ if ( $choixUtilisateur -eq 2 )
 }
 
 
-#Ajoutez un Adaptateur Réseau a l'HPV
+#Ajoutez un Adaptateur Rï¿½seau a l'HPV
 if ( $choixUtilisateur -eq 3 )
 {
     Get-NetAdapter
@@ -92,7 +111,7 @@ if ( $choixUtilisateur -eq 3 )
 }
 
 
-#Ajoutez un adaptateur Réseau a une VM
+#Ajoutez un adaptateur Rï¿½seau a une VM
 if ( $choixUtilisateur -eq 4 )
 {
     Get-NetAdapter
@@ -105,7 +124,7 @@ if ( $choixUtilisateur -eq 4 )
     Write-Output ""
     Add-VMNetworkAdapter -Name "$nomAdaptateur"  -SwitchName "$nomVSwitch" -VMName "$nomVM"
     Write-Output ""
-    Write-Output "Voila l'apadtateur $nomAdaptateur à étais crée pour $nomVM à travert $nomVSwitch"
+    Write-Output "Voila l'apadtateur $nomAdaptateur ï¿½ ï¿½tais crï¿½e pour $nomVM ï¿½ travert $nomVSwitch"
     Write-Output ""
     $choix = read-host "Appyez sur ENTREE pour quitter"
 
@@ -129,12 +148,12 @@ if ( $choixUtilisateur -eq 5 )
 
 
 
-#Programme Afficher les cartes réseaux et les vSwitch
+#Programme Afficher les cartes rï¿½seaux et les vSwitch
 if ( $choixUtilisateur -eq 6 )
 {
     Write-Output "_______________________________________________________________________"
     Write-Output ""
-    Write-Output "Voici les Cartes Réseaux..."
+    Write-Output "Voici les Cartes Reseaux..."
     Write-Output ""
     Get-NetAdapter 
     Write-Output ""
@@ -153,8 +172,22 @@ if ( $choixUtilisateur -eq 6 )
     $choix = read-host "Appyez sur ENTREE pour quitter"
 }
 
-#Programme copyright
+#Programme Instalation de hyper-v
 if ( $choixUtilisateur -eq 7 )
+{
+    Write-Output "_______________________________________________________________________"
+    Write-Output ""    
+    Write-Output "Le script va installer le role Hyper-V puis redemarera "
+    Write-Output ""
+    $nomMachine = hostname
+    Install-WindowsFeature -Name Hyper-V -ComputerName $nomMachine -IncludeManagementTools -Restart
+    Write-Output ""
+    Write-Output "_______________________________________________________________________"
+    Write-Output ""
+}
+
+#Programme copyright
+if ( $choixUtilisateur -eq 8 )
 {
     Write-Output "_______________________________________________________________________"
     Write-Output ""
