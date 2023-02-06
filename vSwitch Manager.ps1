@@ -180,7 +180,29 @@ if ( $choixUtilisateur -eq 7 )
     Write-Output "Le script va installer le role Hyper-V puis redemarera "
     Write-Output ""
     $nomMachine = hostname
-    Install-WindowsFeature -Name Hyper-V -ComputerName $nomMachine -IncludeManagementTools -Restart
+    Install-WindowsFeature -Name Hyper-V -ComputerName $nomMachine -IncludeManagementTools 
+
+    Write-Output "_______________________________________________________________________"
+    Write-Output ""
+    Write-Output "Creation des fichiers dans D:\Hyper-V\VM "
+    Write-Output "Creation des fichiers dans D:\Hyper-V\VHDX "
+    Write-Output "Modification des cle de Registres Hyper-V"
+
+    #Association des chemin a des variables
+    $defaultConfigPath = "D:\Hyper-V\VM"
+    $defaultVhdxPath = "D:\Hyper-V\VHDX"
+    
+    #creation des dossiers dans la partition D
+    New-Item -Path $defaultConfigPath -ItemType Directory
+    New-Item -Path $defaultVhdxPath -ItemType Directory
+    Write-Output ""
+
+    #Modification de clé de registres
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Virtualization" -Name "DefaultVmDirectory" -Value $defaultConfigPath
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Virtualization" -Name "DefaultVirtualHardDiskPath" -Value $defaultVhdxPath
+    Write-Output ""
+
+    restart-computer
     Write-Output ""
     Write-Output "_______________________________________________________________________"
     Write-Output ""
@@ -200,6 +222,16 @@ if ( $choixUtilisateur -eq 8 )
     $choix = read-host "Appyez sur ENTREE pour quitter"
 }
 
+#Programme debug
+if ( $choixUtilisateur -eq 9 )
+{
+    Write-Output "_______________________________________________________________________"
+    Write-Output ""
+    Write-Output ""
+    Write-Output "_______________________________________________________________________"
+    Write-Output ""
+    $choix = read-host "Appyez sur ENTREE pour quitter"
+}
 
 
 }#fin boucle while(1)
