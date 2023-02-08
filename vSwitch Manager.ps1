@@ -4,7 +4,7 @@ while(1){
 clear
 
 Write-Output "_______________________________________________________________________"
-Write-Output "
+Write-Host "
                                                                 
         _____       _ _       _      _____                                           
     _ _|   __|_ _ _|_| |_ ___| |_   |     |___ ___ ___ ___ ___ ___  
@@ -15,29 +15,29 @@ Write-Output "
            _          ____  _     _ _   _       _ _                 
           | |_ _ _   |    \|_|___|_| |_| |_ ___| | |                      
           | . | | |  |  |  | | . | |  _|   | .'| | |                      
-          |___|_  |  |____/|_|_  |_|_| |_|_|__,|_|_|      Lite v2.1                
+          |___|_  |  |____/|_|_  |_|_| |_|_|__,|_|_|      Lite v2.2                
               |___|          |___|                              
                                                                  "
 
 Write-Output "_______________________________________________________________________"
 Write-Output ""
-Write-Output "1 - Creer un vSwitch"
-Write-Output "2 - Supprimer un vSwitch"
-Write-Output "3 - Ajoutez un Adaptateur Reseau a l'HPV"
-Write-Output "4 - Ajoutez un adaptateur Reseau a une VM"
-Write-Output "5 - Supprimer un adaptateur Reseau a une VM"
-Write-Output "6 - Affiche les Cartes Reseaux, vSwitch et les VM "
-Write-Output "7 - Installer le role Hyper-V"
-Write-Output "9 - Copyright "
-Write-Output ""
+Write-Output "  1 - Installer le role Hyper-V et generer les fihiers pour Hyper-V"
+Write-Output "  2 - Creer un vSwitch"
+Write-Output "  3 - Supprimer un vSwitch"
+Write-Output "  4 - Ajoutez un Adaptateur Reseau a l'HPV"
+Write-Output "  5 - Ajoutez un adaptateur Reseau a une VM"
+Write-Output "  6 - Supprimer un adaptateur Reseau a une VM"
+Write-Output "  7 - Affiche les Cartes Reseaux, vSwitch et les VM "
+Write-Output "  8 - Copyright "
+Write-Output "  9 - Debug" 
 Write-Output "_______________________________________________________________________"
 Write-Output ""
 
-$choixUtilisateur = read-host "Que souhaitez vous faire ? 1,2,3,4,5,6,7 ou 8"
+$choixUtilisateur = read-host "Que souhaitez vous faire ? 1,2,3,4,5,6,7,8 ou 9"
 Write-Output ""
 
 #Creer un vSwitch
-if ( $choixUtilisateur -eq 1 )
+if ( $choixUtilisateur -eq 2 )
 {
 
     $versionOS = read-host "Vous etes sur WindowsServer2019 ou WindowsServer2022 (1 ou 2)? "
@@ -83,7 +83,7 @@ if ( $choixUtilisateur -eq 1 )
 
 
 #Programe supprimer un vSwitch
-if ( $choixUtilisateur -eq 2 )
+if ( $choixUtilisateur -eq 3 )
 {
     Get-NetAdapter
     Write-Output ""
@@ -96,8 +96,8 @@ if ( $choixUtilisateur -eq 2 )
 }
 
 
-#Ajoutez un Adaptateur R�seau a l'HPV
-if ( $choixUtilisateur -eq 3 )
+#Ajoutez un Adaptateur Reseau a l'HPV
+if ( $choixUtilisateur -eq 4 )
 {
     Get-NetAdapter
     Write-Output ""
@@ -111,8 +111,8 @@ if ( $choixUtilisateur -eq 3 )
 }
 
 
-#Ajoutez un adaptateur R�seau a une VM
-if ( $choixUtilisateur -eq 4 )
+#Ajoutez un adaptateur Reseau a une VM
+if ( $choixUtilisateur -eq 5 )
 {
     Get-NetAdapter
     Write-Output ""
@@ -132,7 +132,7 @@ if ( $choixUtilisateur -eq 4 )
 
 
 #Programme supprimer un adaptateur du vSwitch a l'adapteur
-if ( $choixUtilisateur -eq 5 )
+if ( $choixUtilisateur -eq 6 )
 {
     Write-Output ""
     $nomAdaptateur = read-host "Quel adaptateur voulez vous supprimer ?"
@@ -148,8 +148,8 @@ if ( $choixUtilisateur -eq 5 )
 
 
 
-#Programme Afficher les cartes r�seaux et les vSwitch
-if ( $choixUtilisateur -eq 6 )
+#Programme Afficher les cartes reseaux et les vSwitch
+if ( $choixUtilisateur -eq 7 )
 {
     Write-Output "_______________________________________________________________________"
     Write-Output ""
@@ -174,7 +174,7 @@ if ( $choixUtilisateur -eq 6 )
 
 
 #Programme Instalation de hyper-v + changement du role
-if ( $choixUtilisateur -eq 7 )
+if ( $choixUtilisateur -eq 1 )
 {
     Write-Output "_______________________________________________________________________"
     Write-Output ""    
@@ -185,14 +185,14 @@ if ( $choixUtilisateur -eq 7 )
 
     Write-Output "_______________________________________________________________________"
     Write-Output ""    
-    Write-Output "Creation des fichiers dans D:\Hyper-V\VM "
-    Write-Output "Creation des fichiers dans D:\Hyper-V\VHDX "
+    Write-Output "Creation du repertoire Hyper-V"
     Write-Output "Modification des cle de Registres Hyper-V"
     Write-Output ""    
 
     Write-Output "Affichage des lecteurs disponible"
     Write-Output ""    
 
+    #affiche localement les disques dispo
     wmic logicaldisk get name
     Write-Output ""    
     
@@ -213,10 +213,22 @@ if ( $choixUtilisateur -eq 7 )
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Virtualization" -Name "DefaultVmDirectory" -Value $defaultConfigPath
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Virtualization" -Name "DefaultVirtualHardDiskPath" -Value $defaultVhdxPath
 
-    restart-computer
-    Write-Output ""
+    #timer avant arret
     Write-Output "_______________________________________________________________________"
     Write-Output ""
+    Write-Host "L'ordinateur va redemarer dans 5 secondes" -ForegroundColor Red
+    Start-Sleep -Seconds 1
+    Write-Host "L'ordinateur va redemarer dans 4 secondes" -ForegroundColor Red
+    Start-Sleep -Seconds 1
+    Write-Host "L'ordinateur va redemarer dans 3 secondes" -ForegroundColor Red
+    Start-Sleep -Seconds 1
+    Write-Host "L'ordinateur va redemarer dans 2 secondes" -ForegroundColor Red
+    Start-Sleep -Seconds 1
+    Write-Host "L'ordinateur va redemarer dans 1 secondes" -ForegroundColor Red
+    Start-Sleep -Seconds 1
+
+    #arret de l'ordinateur
+    restart-computer
 }
 
 #Programme copyright
@@ -236,21 +248,21 @@ if ( $choixUtilisateur -eq 8 )
 #Programme debug
 if ( $choixUtilisateur -eq 9 )
 {
-    Write-Output "_______________________________________________________________________"
-    #Association des chemin a des variables
-    $defaultConfigPath = "D:\Hyper-V\VM"
-    $defaultVhdxPath = "D:\Hyper-V\VHDX"
-    
-    #creation des dossiers dans la partition D
-    New-Item -Path $defaultConfigPath -ItemType Directory
-    New-Item -Path $defaultVhdxPath -ItemType Directory
-    Write-Output ""
 
-    #Modification de clé de registres
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Virtualization" -Name "DefaultVmDirectory" -Value $defaultConfigPath
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Virtualization" -Name "DefaultVirtualHardDiskPath" -Value $defaultVhdxPath
+    #timer avant arret
+    Write-Output "_______________________________________________________________________"
     Write-Output ""
-    $choix = read-host "Appyez sur ENTREE pour quitter"
+    Write-Host "L'ordinateur va redemarer dans 5 secondes" -ForegroundColor Red
+    Start-Sleep -Seconds 1
+    Write-Host "L'ordinateur va redemarer dans 4 secondes" -ForegroundColor Red
+    Start-Sleep -Seconds 1
+    Write-Host "L'ordinateur va redemarer dans 3 secondes" -ForegroundColor Red
+    Start-Sleep -Seconds 1
+    Write-Host "L'ordinateur va redemarer dans 2 secondes" -ForegroundColor Red
+    Start-Sleep -Seconds 1
+    Write-Host "L'ordinateur va redemarer dans 1 secondes" -ForegroundColor Red
+    Start-Sleep -Seconds 1
+
 }
 
 
