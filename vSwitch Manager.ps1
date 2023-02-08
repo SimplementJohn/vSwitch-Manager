@@ -1,4 +1,4 @@
-
+﻿
 #boucle infini
 while(1){
 clear
@@ -28,7 +28,7 @@ Write-Output "4 - Ajoutez un adaptateur Reseau a une VM"
 Write-Output "5 - Supprimer un adaptateur Reseau a une VM"
 Write-Output "6 - Affiche les Cartes Reseaux, vSwitch et les VM "
 Write-Output "7 - Installer le role Hyper-V"
-Write-Output "8 - Copyright "
+Write-Output "9 - Copyright "
 Write-Output ""
 Write-Output "_______________________________________________________________________"
 Write-Output ""
@@ -172,7 +172,8 @@ if ( $choixUtilisateur -eq 6 )
     $choix = read-host "Appyez sur ENTREE pour quitter"
 }
 
-#Programme Instalation de hyper-v
+
+#Programme Instalation de hyper-v + changement du role
 if ( $choixUtilisateur -eq 7 )
 {
     Write-Output "_______________________________________________________________________"
@@ -183,14 +184,25 @@ if ( $choixUtilisateur -eq 7 )
     Install-WindowsFeature -Name Hyper-V -ComputerName $nomMachine -IncludeManagementTools 
 
     Write-Output "_______________________________________________________________________"
-    Write-Output ""
+    Write-Output ""    
     Write-Output "Creation des fichiers dans D:\Hyper-V\VM "
     Write-Output "Creation des fichiers dans D:\Hyper-V\VHDX "
     Write-Output "Modification des cle de Registres Hyper-V"
+    Write-Output ""    
+
+    Write-Output "Affichage des lecteurs disponible"
+    Write-Output ""    
+
+    wmic logicaldisk get name
+    Write-Output ""    
+    
+    Write-Output "Quel emplacement voulez vous stocker le dossier Hyper-V ?"
+    $emplacement = read-host "Ecrivez la lettre en majuscule suivi de ':' "
+    Write-Output ""    
 
     #Association des chemin a des variables
-    $defaultConfigPath = "D:\Hyper-V\VM"
-    $defaultVhdxPath = "D:\Hyper-V\VHDX"
+    $defaultConfigPath = "$emplacement\Hyper-V\VM"
+    $defaultVhdxPath = "$emplacement\Hyper-V\VHDX"
     
     #creation des dossiers dans la partition D
     New-Item -Path $defaultConfigPath -ItemType Directory
@@ -200,7 +212,6 @@ if ( $choixUtilisateur -eq 7 )
     #Modification de clé de registres
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Virtualization" -Name "DefaultVmDirectory" -Value $defaultConfigPath
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Virtualization" -Name "DefaultVirtualHardDiskPath" -Value $defaultVhdxPath
-    Write-Output ""
 
     restart-computer
     Write-Output ""
@@ -226,9 +237,18 @@ if ( $choixUtilisateur -eq 8 )
 if ( $choixUtilisateur -eq 9 )
 {
     Write-Output "_______________________________________________________________________"
+    #Association des chemin a des variables
+    $defaultConfigPath = "D:\Hyper-V\VM"
+    $defaultVhdxPath = "D:\Hyper-V\VHDX"
+    
+    #creation des dossiers dans la partition D
+    New-Item -Path $defaultConfigPath -ItemType Directory
+    New-Item -Path $defaultVhdxPath -ItemType Directory
     Write-Output ""
-    Write-Output ""
-    Write-Output "_______________________________________________________________________"
+
+    #Modification de clé de registres
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Virtualization" -Name "DefaultVmDirectory" -Value $defaultConfigPath
+    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Virtualization" -Name "DefaultVirtualHardDiskPath" -Value $defaultVhdxPath
     Write-Output ""
     $choix = read-host "Appyez sur ENTREE pour quitter"
 }
