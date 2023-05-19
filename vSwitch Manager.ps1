@@ -21,7 +21,7 @@ Write-Host "
 
 Write-Output "_______________________________________________________________________"
 Write-Output ""
-Write-Output "  1 - Installer le role Hyper-V et generer les fihiers pour Hyper-V"
+Write-Output "  1 - Installer le role Hyper-V et generer les fihiers dans le disque D:/ pour Hyper-V"
 Write-Output "  2 - Creer un vSwitch"
 Write-Output "  3 - Supprimer un vSwitch"
 Write-Output "  4 - Affiche les Cartes Reseaux, vSwitch et les VM "
@@ -205,6 +205,5 @@ if ( $choixUtilisateur -eq 6 )
     Start-Sleep -Seconds 1
 
 }
-
 
 }#fin boucle while(1)
